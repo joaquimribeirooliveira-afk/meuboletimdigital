@@ -1,4 +1,4 @@
-// ARRAY: Lista com todas as 15 disciplinas, notas e faltas atualizadas
+// ARRAY: Lista com todas as 15 disciplinas, notas e faltas do 8º Ano
 const disciplinas = [
   { disciplina: "Língua Portuguesa", tri1: "9,4", tri2: "9,0", tri3: null, faltas: [2, 4, 0] },
   { disciplina: "Matemática", tri1: "7,5", tri2: "6,1", tri3: null, faltas: [3, 5, 0] },
@@ -17,7 +17,7 @@ const disciplinas = [
   { disciplina: "Práticas Experimentais", tri1: "7,2", tri2: "8,7", tri3: null, faltas: [2, 4, 0] }
 ];
 
-// FUNÇÃO: Converte qualquer formato de nota para a escala de 0 a 10
+// FUNÇÃO: Normaliza qualquer valor de nota para a escala de 0 a 10
 function normalizarNota(valor) {
   if (valor === null || valor === undefined || valor === "") {
     return null;
@@ -40,13 +40,13 @@ function normalizarNota(valor) {
   return null;
 }
 
-// Formata o número para exibição com vírgula ou "—" se não houver nota
+// Formata a nota para exibição no padrão brasileiro com vírgula (ex: 9,4)
 function formatarNotaExibicao(nota) {
   if (nota === null) return "—";
   return nota.toFixed(1).replace('.', ',');
 }
 
-// Som ASMR em síntese de áudio leve
+// Som suave de hover para cards e linhas
 function tocarSomASMR(frequencia = 400) {
   try {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -61,24 +61,50 @@ function tocarSomASMR(frequencia = 400) {
     osc.start();
     osc.stop(audioCtx.currentTime + 0.06);
   } catch (e) {
-    // Silencioso caso o áudio esteja bloqueado pelo navegador
+    // Silencioso se o áudio estiver bloqueado
   }
 }
 
-// FUNÇÃO DA EXPLOSÃO DOURADA: Cria várias partículas onde o usuário clica
+// SOM DE CLIQUE SATISFATÓRIO (Estilo "Pop" Cristalino ASMR)
+function tocarSomCliqueSatisfatorio() {
+  try {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = 'sine';
+    // Onda de som que desce rápido gera o tom de "pop" suave
+    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(350, audioCtx.currentTime + 0.08);
+
+    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.08);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.08);
+  } catch (e) {
+    // Silencioso caso o áudio não tenha permissão
+  }
+}
+
+// FUNÇÃO DA EXPLOSÃO DOURADA: Cria partículas douradas + som no clique
 function criarExplosaoDourada(e) {
+  // Toca o som satisfatório de clique
+  tocarSomCliqueSatisfatorio();
+
   const quantidadeParticulas = 16;
   
   for (let i = 0; i < quantidadeParticulas; i++) {
     const particula = document.createElement("div");
     particula.classList.add("particula-ouro");
     
-    // Tamanho aleatório entre 4px e 12px
     const tamanho = Math.random() * 8 + 4;
     particula.style.width = `${tamanho}px`;
     particula.style.height = `${tamanho}px`;
 
-    // Ângulo e distância aleatórios para espalhar em todas as direções
     const angulo = Math.random() * Math.PI * 2;
     const distancia = Math.random() * 80 + 20;
     const dx = Math.cos(angulo) * distancia;
@@ -87,20 +113,16 @@ function criarExplosaoDourada(e) {
     particula.style.setProperty("--dx", `${dx}px`);
     particula.style.setProperty("--dy", `${dy}px`);
 
-    // Posição exatamente onde aconteceu o clique
     particula.style.left = `${e.clientX}px`;
     particula.style.top = `${e.clientY}px`;
 
     document.body.appendChild(particula);
 
-    // Remove a partícula do DOM depois que a animação acaba (0.6s)
     setTimeout(() => particula.remove(), 600);
   }
-
-  tocarSomASMR(600);
 }
 
-// Preenche a tabela e atualiza os cards automaticamente
+// Carrega os dados na tabela e nos cards ao abrir o site
 function carregarBoletim() {
   const tabela = document.getElementById("tabela-boletim");
   
@@ -174,7 +196,7 @@ function carregarBoletim() {
     card.addEventListener("mouseenter", () => tocarSomASMR(520));
   });
 
-  // Ativa o evento de explosão ao clicar na página
+  // Escuta os cliques na página para gerar a explosão dourada e o som satisfatório
   document.addEventListener("click", criarExplosaoDourada);
 }
 
