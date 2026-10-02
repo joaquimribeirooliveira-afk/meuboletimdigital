@@ -20,6 +20,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   padding: 20px;
+  overflow-x: hidden;
 }
 
 .container {
@@ -56,7 +57,7 @@ body {
   margin-bottom: 40px;
 }
 
-/* Estilo individual dos Cards (Preto com Bordas Dourado Metálico) */
+/* Estilo individual dos Cards */
 .card {
   background-color: var(--card-bg);
   border: 2px solid var(--gold-border);
@@ -64,13 +65,10 @@ body {
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-
-  /* Animação suave e satisfatória ao interagir com os cards */
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease, border-color 0.3s ease;
   cursor: pointer;
 }
 
-/* Efeito ao passar o mouse sobre os cards (Hover ASMR visual) */
 .card:hover {
   transform: translateY(-6px) scale(1.02);
   border-color: var(--gold-vibrant);
@@ -107,7 +105,6 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
 }
 
-/* Permite rolar a tabela em celulares sem quebrar a tela */
 .table-container {
   overflow-x: auto;
 }
@@ -132,16 +129,16 @@ th {
   border-bottom: 2px solid var(--gold-border);
 }
 
-/* Efeito de destaque ao passar o mouse nas linhas da tabela */
 tbody tr {
   transition: background-color 0.2s ease;
+  cursor: pointer;
 }
 
 tbody tr:hover {
   background-color: rgba(255, 215, 0, 0.05);
 }
 
-/* Tags coloridas de Situação */
+/* Tags de Situação */
 .badge {
   display: inline-block;
   padding: 4px 10px;
@@ -169,7 +166,29 @@ tbody tr:hover {
   border: 1px solid #7f8c8d;
 }
 
-/* Ajustes para telas menores (celular) */
+/* Partículas para o efeito de explosão dourada ao clicar */
+.particula-ouro {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffd700 0%, #d4af37 100%);
+  box-shadow: 0 0 10px #ffd700, 0 0 15px #ffd700;
+  z-index: 9999;
+  animation: animacaoExplosao 0.6s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+}
+
+@keyframes animacaoExplosao {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(0);
+    opacity: 0;
+  }
+}
+
+/* Ajustes para telas menores (celulares) */
 @media (max-width: 600px) {
   .header h1 {
     font-size: 1.8rem;
