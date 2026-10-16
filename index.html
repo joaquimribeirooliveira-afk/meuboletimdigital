@@ -12,59 +12,82 @@
     <!-- Cabeçalho do Boletim -->
     <header class="header">
       <h1>Boletim Digital</h1>
-      <p class="subtitle">Estudante Exemplo — 8º Ano</p>
+      <p class="subtitle">Estudante — 8º Ano (Turma 8C | Nº 12)</p>
     </header>
 
-    <!-- Cards de Resumo -->
-    <section class="cards-grid">
-      <div class="card">
-        <h3>Média Geral</h3>
-        <p id="card-media-geral" class="card-value">—</p>
+    <!-- Tela de Acesso / PIN -->
+    <section id="area-login" class="card-login">
+      <h2>Acesso ao Boletim</h2>
+      <div class="info-estudante-login">
+        <p><strong>Série:</strong> 8º Ano</p>
+        <p><strong>Turma:</strong> 8C</p>
+        <p><strong>Nº de Chamada:</strong> 12</p>
       </div>
-
-      <div class="card">
-        <h3>Total de Faltas</h3>
-        <p id="card-total-faltas" class="card-value">—</p>
+      <div class="form-login">
+        <label for="campo-pin">PIN de Acesso:</label>
+        <input type="password" id="campo-pin" placeholder="Digite seu PIN" maxlength="20" autocomplete="off">
+        <button id="btn-entrar" type="button">Entrar</button>
       </div>
-
-      <div class="card">
-        <h3>Bom Desempenho</h3>
-        <p id="card-bom-desempenho" class="card-value">—</p>
-      </div>
-
-      <div class="card">
-        <h3>Precisa de Atenção</h3>
-        <p id="card-atencao" class="card-value">—</p>
-      </div>
-
-      <div class="card">
-        <h3>Frequência</h3>
-        <p class="card-value">92%</p>
-        <span class="card-status">Frequência adequada</span>
-      </div>
+      <p id="mensagem-login" class="mensagem-status"></p>
     </section>
 
-    <!-- Tabela Responsiva com as Disciplinas -->
-    <section class="table-section">
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Disciplina</th>
-              <th>1º Tri</th>
-              <th>2º Tri</th>
-              <th>3º Tri</th>
-              <th>Média</th>
-              <th>Faltas</th>
-              <th>Situação</th>
-            </tr>
-          </thead>
-          <tbody id="tabela-boletim">
-            <!-- Os dados das 15 disciplinas serão colocados aqui pelo JavaScript -->
-          </tbody>
-        </table>
+    <!-- Conteúdo do Boletim (inicialmente oculto) -->
+    <div id="conteudo-boletim" style="display: none;">
+      <div class="bar-acoes">
+        <button id="btn-alternar-edicao" type="button">Alterar dados</button>
       </div>
-    </section>
+
+      <!-- Cards de Resumo -->
+      <section class="cards-grid">
+        <div class="card">
+          <h3>Média Geral</h3>
+          <p id="card-media-geral" class="card-value">—</p>
+        </div>
+
+        <div class="card">
+          <h3>Total de Faltas</h3>
+          <p id="card-total-faltas" class="card-value">—</p>
+        </div>
+
+        <div class="card">
+          <h3>Bom Desempenho</h3>
+          <p id="card-bom-desempenho" class="card-value">—</p>
+        </div>
+
+        <div class="card">
+          <h3>Precisa de Atenção</h3>
+          <p id="card-atencao" class="card-value">—</p>
+        </div>
+
+        <div class="card">
+          <h3>Frequência</h3>
+          <p class="card-value">92%</p>
+          <span class="card-status">Frequência adequada</span>
+        </div>
+      </section>
+
+      <!-- Tabela Responsiva com as Disciplinas -->
+      <section class="table-section">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Disciplina</th>
+                <th>1º Tri</th>
+                <th>2º Tri</th>
+                <th>3º Tri</th>
+                <th>Média</th>
+                <th>Faltas</th>
+                <th>Situação</th>
+              </tr>
+            </thead>
+            <tbody id="tabela-boletim">
+              <!-- Os dados das disciplinas serão colocados aqui pelo JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
   </div>
 
   <script src="script.js"></script>
